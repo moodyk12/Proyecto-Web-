@@ -33,7 +33,7 @@
         </div>
     </header>
 
-    <main>
+    <section>
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <article class="col">
@@ -53,97 +53,9 @@
                         </div>
                     </div>
                 </article>
-
-                <article class="col">
-                    <div class="card shadow-sm tarjeta-producto">
-                        <img src="imagenes/zap2.png" alt="Adidas Response cl Bad Bunny">
-                        <div class="card-body">
-                            <h5 class="card-title card-title-rosa">Adidas Response cl Bad Bunny</h5>
-                            <p class="card-text card-text_letra">$300.00</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <!-- Botón de Detalles -->
-                                    <a href="detalles_producto.php?producto=2" class="btn btn-rosa" role="button">Detalles</a>
-                                </div>
-                                <!-- Botón de Agregar a la Cesta -->
-                                <a href="agregar_cesta.php" class="btn btn-rosa" role="button">Agregar a la Cesta</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="col">
-                    <div class="card shadow-sm tarjeta-producto">
-                        <img src="imagenes/zap3.png" alt="Adidas Forum X Bad Bunny">
-                        <div class="card-body">
-                            <h5 class="card-title card-title-rosa">Adidas Forum X Bad Bunny</h5>
-                            <p class="card-text card-text_letra">$300.00</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <!-- Botón de Detalles -->
-                                    <a href="detalles_producto.php?producto=3" class="btn btn-rosa" role="button">Detalles</a>
-                                </div>
-                                <!-- Botón de Agregar a la Cesta -->
-                                <a href="agregar_cesta.php" class="btn btn-rosa" role="button">Agregar a la Cesta</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article class="col">
-                    <div class="card shadow-sm tarjeta-producto">
-                        <img src="imagenes/zap4.png" alt="Adidas Gazelle Indoor bad bunny">
-                        <div class="card-body">
-                            <h5 class="card-title card-title-rosa">Adidas Gazelle Indoor bad bunny</h5>
-                            <p class="card-text card-text_letra">$230.00</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <!-- Botón de Detalles -->
-                                    <a href="detalles_producto.php" class="btn btn-rosa" role="button">Detalles</a>
-                                </div>
-                                <!-- Botón de Agregar a la Cesta -->
-                                <a href="agregar_cesta.php" class="btn btn-rosa" role="button">Agregar a la Cesta</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article class="col">
-                    <div class="card shadow-sm tarjeta-producto">
-                        <img src="imagenes/zap6.png" alt="Adidas Yeezy Slide">
-                        <div class="card-body">
-                            <h5 class="card-title card-title-rosa">Adidas Yeezy Slide</h5>
-                            <p class="card-text card-text_letra">$200.00</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <!-- Botón de Detalles -->
-                                    <a href="detalles_producto.php" class="btn btn-rosa" role="button">Detalles</a>
-                                </div>
-                                <!-- Botón de Agregar a la Cesta -->
-                                <a href="agregar_cesta.php" class="btn btn-rosa" role="button">Agregar a la Cesta</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <article class="col">
-                    <div class="card shadow-sm tarjeta-producto">
-                        <img src="imagenes/crocs.png" alt="Croc Matte">
-                        <div class="card-body">
-                            <h5 class="card-title card-title-rosa">Croc Matte</h5>
-                            <p class="card-text card-text_letra">$230.00</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <!-- Botón de Detalles -->
-                                    <a href="detalles_producto.php" class="btn btn-rosa" role="button">Detalles</a>
-                                </div>
-                                <!-- Botón de Agregar a la Cesta -->
-                                <a href="agregar_cesta.php" class="btn btn-rosa" role="button">Agregar a la Cesta</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
+                
         
-    </main>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
