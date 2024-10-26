@@ -1,5 +1,5 @@
 /* Espaciado para el contenedor principal */
-main > .container {
+section > .container {
     padding: 30px 0;
 }
 
@@ -92,7 +92,5 @@ main > .container {
     max-height: 200px; 
     object-fit: cover; 
 } */
-
-
 
 
