@@ -1,5 +1,5 @@
 <?php
-
+require 'config/config.php';
 require 'config/database.php';
 $db = new Database();
 $con = $db->conectar();
@@ -39,9 +39,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                             <a href="#" class="nav-link">Contáctanos</a>
                         </li>
                     </ul>
-                    <a href="#" class="btn btn-cesta">Cesta</a>
+                    <a href="#" class="btn btn-rosa">Cesta</a>
 
-                    <a href="login.php" class="btn btn-cesta ms-2">Iniciar Sesión</a> 
+                    <a href="login.php" class="btn btn-rosa ms-2">Iniciar Sesión</a> 
                 </div>
             </div>
         </div>
@@ -55,20 +55,19 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                         <div class="card shadow-sm tarjeta-producto">
                             <?php
                             $id = $row['id'];
-                            $imagen = "imagenes/zap" . $id . ".png";
+                            $imagen = "imagenes/img/" . $id . "/zap.png";
 
                             if(!file_exists($imagen)){
                                 $imagen = "imagenes/fotos.png";
                             }
                             ?>
-
                             <img src="<?php echo $imagen; ?>" alt="">
                             <div class="card-body">
                                 <h5 class="card-title card-title-rosa"><?php echo $row['nombre'] ?></h5>
                                 <p class="card-text card-text_letra"> $<?php echo number_format($row['precio'], 2, '.', ',' )?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a href="detalles_producto.php" class="btn btn-rosa" role="button">Detalles</a>
+                                        <a href="detalles_producto.php?id=<?php echo $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>" class="btn btn-rosa" role="button">Detalles</a>
                                     </div>
                                     <a href="agregar_cesta.php" class="btn btn-rosa" role="button">Agregar a la Cesta</a>
                                 </div>

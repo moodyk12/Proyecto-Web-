@@ -1,68 +1,84 @@
 /* Espaciado para el contenedor principal */
 section > .container {
-    padding: 30px 0;
+    padding: 30px;
 }
-
-/* Estilos de los botones */
+body {
+    background-color: #f5f5f5;          /*cambio el color luego*/
+    font-family: Arial, sans-serif;
+}
+/* BOTONES GENERAL */
 .btn-rosa {
-    background-color: #f7c6d7; /* Color de fondo del botón */
-    border-color: #f7c6d7;     /* Color del borde del botón */
-    color: #000;               /* Color del texto en el botón */
-    font-family: 'Arial', sans-serif; /* Cambia 'Arial' al tipo de letra que prefieras */
-    font-weight: bold; /* Grosor de la fuente */
+    background-color: #F7C6D7;
+            color: #333;
+            border: none;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
 }
-
 .btn-rosa:hover {
     background-color: #f5a4b7; /* Color de fondo al pasar el mouse */
     border-color: #f5a4b7;
 }
 
-/* Color de fondo del botón Cesta */
-.btn-cesta {
-    background-color: #df2c68; /* Un rosa fuerte para el botón */
-    color: #fff; /* Texto blanco */
-}
-
-.btn-cesta:hover {
-    background-color: #d55a85; /* Un rosa un poco más oscuro en hover */
-}
-
-/* Estilos del texto */
-.card-title-rosa {
-    color: #171616; 
-    font-family: 'Roboto', sans-serif; 
-    font-weight: bold; 
-}
- /* tipo de letras del titulo del articulo */
-.card-text_letra{
-    font-family: 'Roboto', sans-serif; /* Cambia 'Arial' al tipo de letra que prefieras */
-    font-weight: bold; /* Puedes ajustar el grosor de la fuente */
-}
-
-/* Estilos del menú de navegación */
+/* NAVEGACION DEL MENU */
 .navbar {
     background-color: #f06292; /* Un rosa fuerte para el menú */
 
 }
-
+.navbar-brand, .nav-link.active {
+            font-weight: bold;
+            color: #F7C6D7;
+}
 .navbar .nav-link {
-    color: #fff; /* Cambia el color de texto a blanco */
+    color: #ffffff; /* Cambia el color de texto a blanco */
 }
 
-.navbar .nav-link.active {
-    font-weight: bold; /* Mantener el texto activo en negrita */
+
+/* ESTILO DEL TEXTOS DE LAS IMAGENES */
+.card-title-rosa {
+    color: #171616; 
+    font-family: Arial, sans-serif; 
+    font-weight: bold; 
 }
 
-/* Estilos de la tarjeta de producto */
+/* TARJETA DE PRODUCTO */
 .tarjeta-producto {
     transition: transform 0.3s; /* Tiempo de transición para el efecto */
 }
-
 .tarjeta-producto:hover {
     transform: scale(1.05); /* Aumenta el tamaño de la tarjeta al 105% */
 }
 
-/* Estilo para el contenedor del formulario de inicio de sesión */
+/* PANTALLA DE DATALLES DE PRODUCTO */
+.carousel {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #FF5733;
+}
+
+.discount {
+    font-size: 1rem;
+    color: #28a745;
+}
+
+
+
+
+
+
+
+/* creo que es de la pantalla login no recuerdoEstilo para el contenedor del formulario de inicio de sesión */
 .login-container {
     max-width: 400px;
     margin: auto;
@@ -92,5 +108,7 @@ section > .container {
     max-height: 200px; 
     object-fit: cover; 
 } */
+
+
 
 
