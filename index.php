@@ -8,6 +8,8 @@ $sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
+
+session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +41,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                             <a href="#" class="nav-link">Contáctanos</a>
                         </li>
                     </ul>
-                    <a href="#" class="btn btn-rosa">Cesta</a>
+                     <a href="cesta.php" class="btn btn-rosa">
+                        Cesta <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
+                    </a>
 
                     <a href="login.php" class="btn btn-rosa ms-2">Iniciar Sesión</a> 
                 </div>
@@ -69,7 +73,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="btn-group">
                                         <a href="detalles_producto.php?id=<?php echo $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>" class="btn btn-rosa" role="button">Detalles</a>
                                     </div>
-                                    <a href="agregar_cesta.php" class="btn btn-rosa" role="button">Agregar a la Cesta</a>
+                                    <button class="btn btn-rosa" type="button" onclick="addProducto(<?php echo $row['id']; ?>, '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>')"> Agregar A la Cesta</button>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +82,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </section>
-    <script scr="js/jquery.min.js"></script>
-    <script scr="js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

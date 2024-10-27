@@ -36,14 +36,16 @@ if ($id === '' || $token == '') {
                 $rutaImg = 'imagenes/fotos.png';
             }
             $imagenes = array();
-            $dir = dir($dir_images);
+            if(file_exists($dir_images)){
+                $dir = dir($dir_images);
 
-            while (($archivo = $dir->read()) !== false) {
-                if ($archivo != 'zap.png' && (strpos($archivo, 'png') !== false || strpos($archivo, 'jpg') !== false)) {
-                    $imagenes[] = $dir_images . $archivo;
+                while (($archivo = $dir->read()) !== false) {
+                    if ($archivo != 'zap.png' && (strpos($archivo, 'png') !== false || strpos($archivo, 'jpg') !== false)) {
+                        $imagenes[] = $dir_images . $archivo;
+                    }
                 }
-            }
-            $dir->close();
+                $dir->close();
+            } 
         }
     } else {
         echo "ID o token no válidos.";
@@ -86,7 +88,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                             <a href="#" class="nav-link">Contáctanos</a>
                         </li>
                     </ul>
-                    <a href="#" class="btn btn-rosa">Cesta</a>
+                    <a href="cesta.php" class="btn btn-rosa">
+                        Cesta <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
+                    </a>
                     <a href="login.php" class="btn btn-rosa ms-2">Iniciar Sesión</a> 
                 </div>
             </div>
@@ -132,7 +136,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <p class="lead"><?php echo $descripcion; ?></p>
 
                     <div class="d-grid gap-3 col-10 mx-auto">
-                        <button class="btn btn-rosa">Agregar A la Cesta</button>
+                        <button class="btn btn-rosa" type="button" onclick="addProducto(<?php echo $id; ?>, '<?php echo $token_tmp?>')"> Agregar A la Cesta</button>
                         <button class="btn btn-rosa">Volver</button>
                     </div>
                 </div>
@@ -142,5 +146,10 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+   
+
+    <!-- NUEVO POR SI NO FUNCIONA LO BORRO -->
+   
 </body>
 </html>
