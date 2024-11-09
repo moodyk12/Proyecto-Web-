@@ -8,8 +8,8 @@ $sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-
-session_destroy();
+//session_destroy();
+//session_start();
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ session_destroy();
                             <a href="#" class="nav-link">Contáctanos</a>
                         </li>
                     </ul>
-                     <a href="cesta.php" class="btn btn-rosa">
+                    <a href="checkout.php" class="btn btn-rosa">
                         Cesta <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                     </a>
 
@@ -82,6 +82,7 @@ session_destroy();
             </div>
         </div>
     </section>
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>

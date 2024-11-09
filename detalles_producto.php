@@ -88,7 +88,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                             <a href="#" class="nav-link">Contáctanos</a>
                         </li>
                     </ul>
-                    <a href="cesta.php" class="btn btn-rosa">
+                    <a href="checkout.php" class="btn btn-rosa">
                         Cesta <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                     </a>
                     <a href="login.php" class="btn btn-rosa ms-2">Iniciar Sesión</a> 
@@ -147,9 +147,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
-   
+
 
     <!-- NUEVO POR SI NO FUNCIONA LO BORRO -->
-   
+
 </body>
 </html>

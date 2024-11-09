@@ -23,7 +23,7 @@ body {
 
 /* NAVEGACION DEL MENU */
 .navbar {
-    background-color: #f06292; /* Un rosa fuerte para el menú */
+    background-color: #000000; /* Un rosa fuerte para el menú */
 
 }
 .navbar-brand, .nav-link.active {
@@ -72,7 +72,26 @@ h2 {
     color: #28a745;
 }
 
+/* boton de cesta */
+.btn-cesta {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #F7C6D7;
+    font-weight: bold;
+    padding: 10px 20px;
+    transition: background-color 0.3s, border-color 0.3s;
+    border-radius: 8px; 
+}
 
+.btn-cesta:hover {
+    background-color: #F7C6D7;
+    border-color: #f5a4b7;
+}
+
+/* TABLAS DE LA CESTA */
+.table th, .table td {
+    border-bottom: 2px solid #F7C6D7; /* Línea divisoria inferior rosada */
+}
 
 
 
