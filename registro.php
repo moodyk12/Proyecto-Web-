@@ -41,9 +41,10 @@ if (!empty($_POST)) {
             if (!registraUsuario([$usuario, $pass_hash, $token, $id], $con)) {
                 $error[] = "Error al registrar su usuario";
             } else {
-                // Si el registro fue exitoso, vaciar los campos
-                $nombres = $apellidos = $email = $usuario = $password = $repassword = ""; // Vaciar los campos
+                header("Location: login.php");
+                exit;
             }
+            
         } else {
             $error[] = "Error al registrar cliente";
         }
