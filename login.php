@@ -25,7 +25,7 @@
                         </li>
                     </ul>
                     <a href="" class="btn btn-cesta">Cesta</a>
-                  
+                
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 </form>
                 <div class="line"></div>
                 <div class="text-center">
-                    <p>No tienes cuenta? <a href="#" class="text-decoration-none">Regístrate aquí</a></p>
+                    <p>No tienes cuenta? <a href="registro.php" class="text-decoration-none">Regístrate aquí</a></p>
                 </div>
             </div>
         </div>

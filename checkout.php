@@ -114,13 +114,16 @@ if ($producto != null) {
                         </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 offset-md-6 d-grid gap-2">
-                        <button class="btn btn-cesta btn-lg">Realizar Pago</button>
+
+                    <?php if ($lista_cesta != null) { ?>
+                        <div class="row">
+                            <div class="col-md-4 offset-md-6 d-grid gap-2">
+                            <a href="pago.php" class="btn btn-cesta btn-lg">Realizar Pago </a>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
             </section>  
-            <!-- //NUEVO A VER SI ME GUSTA SI NO CAMBIO XD -->
+            <!-- //NUEVO A VER SI ME GUSTA SI NO CAMBIO XD  probar cambiar luego sin necesidad del modal -->
                 <div class="modal fade" id="eliminaModal" tabindex="-1" aria-labelledby="eliminaModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">
                         <div class="modal-content">
