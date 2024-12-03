@@ -8,8 +8,8 @@ $sql = $con->prepare("SELECT id, nombre, precio FROM productos WHERE activo=1");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-//session_destroy();
-//session_start();
+// Definir el número de productos en la cesta
+$num_cart = isset($_SESSION['cesta']['productos']) ? count($_SESSION['cesta']['productos']) : 0;
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bunny Vibes</title>
-    <link rel="icon" href="data:,"> <!-- Evita búsqueda de favicon me daba error en inspeccionar -->
+    <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -41,11 +41,21 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                             <a href="#" class="nav-link">Contáctanos</a>
                         </li>
                     </ul>
-                    <a href="checkout.php" class="btn btn-rosa">
+                    <a href="checkout.php" class="btn btn-rosa me-3">
                         Cesta <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                     </a>
-
-                    <a href="login.php" class="btn btn-rosa ms-2">Iniciar Sesión</a> 
+                    <?php  if (isset($_SESSION['user_id'])) { ?>
+                        <div class="dropdown">
+                            <button class="btn btn-rosa dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php echo $_SESSION['user_name']; ?>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a></li>   
+                            </ul>
+                        </div>
+                    <?php } else { ?>
+                        <a href="login.php" class="btn btn-rosa">Inicia sesión</a> 
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -73,7 +83,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                                     <div class="btn-group">
                                         <a href="detalles_producto.php?id=<?php echo $row['id']; ?>&token=<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>" class="btn btn-rosa" role="button">Detalles</a>
                                     </div>
-                                    <button class="btn btn-rosa" type="button" onclick="addProducto(<?php echo $row['id']; ?>, '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>')"> Agregar A la Cesta</button>
+                                    <button class="btn btn-rosa" type="button" onclick="verificarSesionYAgregar(<?php echo $row['id']; ?>, '<?php echo hash_hmac('sha1', $row['id'], KEY_TOKEN);?>')"> Agregar A la Cesta</button>
+
                                 </div>
                             </div>
                         </div>
@@ -83,8 +94,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </section>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

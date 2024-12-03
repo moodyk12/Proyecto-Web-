@@ -35,6 +35,7 @@ body {
 }
 
 
+
 /* ESTILO DEL TEXTOS DE LAS IMAGENES */
 .card-title-rosa {
     color: #171616; 
@@ -95,9 +96,7 @@ h2 {
 
 
 
-
-
-/* creo que es de la pantalla login no recuerdoEstilo para el contenedor del formulario de inicio de sesión */
+/* creo que es de la pantalla login no recuerdo Estilo para el contenedor del formulario de inicio de sesión */
 .login-container {
     max-width: 400px;
     margin: auto;
@@ -127,7 +126,4 @@ h2 {
     max-height: 200px; 
     object-fit: cover; 
 } */
-
-
-
 

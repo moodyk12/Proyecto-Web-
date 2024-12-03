@@ -1,3 +1,31 @@
+<?php
+require 'config/config.php';
+require 'config/database.php';
+require 'clases/Cliente_Fun.php';
+$db = new Database();
+$con = $db->conectar();
+
+$error = [];
+
+if (!empty($_POST)) {
+    $usuario = trim($_POST['usuario']);
+    $password = trim($_POST['password']);
+
+    if (esNulo([$usuario, $password])) {
+        $error[] = "Debe de llenar todos los campos.";
+    }
+
+    if (count($error) == 0) {
+        $resultadoLogin = login($usuario, $password, $con);
+        if ($resultadoLogin) {
+            $error[] = $resultadoLogin;
+        }
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,40 +40,28 @@
         <div class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a href="index.php" class="navbar-brand"><strong>Bunny Vibes</strong></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarHeader">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link active">Categoría</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Contáctanos</a>
-                        </li>
-                    </ul>
-                    <a href="" class="btn btn-cesta">Cesta</a>
-                
-                </div>
             </div>
         </div>
     </header>
 
-    <main>
+    <section>
         <div class="container mt-5">
             <div class="login-container">
                 <h2 class="text-center">Iniciar Sesión</h2>
-                <form>
+
+                <?php mostrarMensaje($error); ?>
+
+                <form method="POST">
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" placeholder="Ingresa tu usuario" required>
+                        <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Ingresa tu usuario"  autocomplete="off">
                     </div>
                     <div class="mb-3">
                         <label for="contraseña" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contraseña" placeholder="Ingresa tu contraseña" required>
+                        <input type="password" class="form-control" id="contraseña" name="password" placeholder="Ingresa tu contraseña"  autocomplete="off">
                     </div>
                     <div class="text-center">
-                        <a href="#" class="text-decoration-none">¿Has olvidado la contraseña?</a>
+                        <a href="contra_recu.php" class="text-decoration-none">¿Has olvidado la contraseña?</a>
                     </div>
                     <button type="submit" class="btn btn-cesta w-100 mt-3">Ingresar</button>
                 </form>
@@ -55,7 +71,7 @@
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

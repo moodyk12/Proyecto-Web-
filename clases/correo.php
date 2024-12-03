@@ -33,7 +33,8 @@ try {
 
 
 
-    $mail->Body    = utf8_encode($cuerpo);
+    $mail->Body    =  mb_convert_encoding($cuerpo, 'UTF-8', 'ISO-8859-1');
+
     $mail->AltBody = 'Prueba de venta para ver si sirve (texto sin formato HTML)';
 
     // Enviar correo

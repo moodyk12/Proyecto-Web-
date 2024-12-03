@@ -7,6 +7,7 @@ $con = $db->conectar();
 
 $error = [];
 $nombres = $apellidos = $email = $usuario = $password = $repassword = ""; // Inicializamos las variables para los campos
+$mensaje_exito = ''; // Variable para el mensaje de éxito
 
 if (!empty($_POST)) {
     // Recibir los datos del formulario
@@ -19,16 +20,16 @@ if (!empty($_POST)) {
 
     // Validación
     if (esNulo([$nombres, $apellidos, $email, $usuario, $password, $repassword])) {
-        $error[] = "Debe de llenar todos los campos ";
+        $error[] = "Debe de llenar todos los campos.";
     }
     if (!validaPassword($password, $repassword)) {
-        $error[] = "Las contraseñas no coinciden";
+        $error[] = "Las contraseñas no coinciden.";
     }
     if (usuarioExiste($usuario, $con)) {
-        $error[] = "El usuario: $usuario ya ha sido registrado";
+        $error[] = "El usuario: $usuario ya ha sido registrado.";
     }
     if (emailExiste($email, $con)) {
-        $error[] = "El correo electrónico: $email ya ha sido registrado";
+        $error[] = "El correo electrónico: $email ya ha sido registrado.";
     }
 
     // Si no hay errores, registrar el cliente y el usuario
@@ -36,21 +37,35 @@ if (!empty($_POST)) {
         $id = registraCliente([$nombres, $apellidos, $email], $con);
 
         if ($id > 0) {
-            $pass_hash = password_hash($password, PASSWORD_DEFAULT);
+            
+            require 'clases/mailer.php';
+            $mailer = new Mailer();
             $token = generarToken();
-            if (!registraUsuario([$usuario, $pass_hash, $token, $id], $con)) {
-                $error[] = "Error al registrar su usuario";
+            $url = URL_SITE . '/act_cliente.php?id=' . $id . '&token=' . $token;
+            $asunto = "Activar Cuenta - Bunny Vibes";
+            $cuerpo = "Para finalizar con el proceso de registro: $nombres $apellidos: <br>, por favor presione el siguiente enlace:
+            <a href='$url'>Haga clic aquí para activar su cuenta</a>";
+
+            $pass_hash = password_hash($password, PASSWORD_DEFAULT);
+        
+            if (registraUsuario([$usuario, $pass_hash, $token, $id], $con)) {
+
+                if ($mailer->email($email, $asunto, $cuerpo)) {
+                    $mensaje_exito = "¡Registro exitoso! Se le ha enviado un mensaje a su correo elecronico $email para activar su cuenta.";
+                    // Limpiar los campos si el registro fue exitoso
+                    $nombres = $apellidos = $email = $usuario = $password = $repassword = '';
+                } else {
+                    $error[] = "Error al enviar el correo de activación.";
+                }
             } else {
-                header("Location: login.php");
-                exit;
+                $error[] = "Error al registrar su usuario.";
             }
             
         } else {
-            $error[] = "Error al registrar cliente";
+            $error[] = "Error al registrar cliente.";
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -92,55 +107,50 @@ if (!empty($_POST)) {
     </header>
 
     <section>
-    <div class="container">
-        <h2>Ingresar Sus Datos</h2>
-        <?php 
-        // Mostrar mensajes de error si existen
-        if (count($error) > 0) {
-            echo '<div class="alert alert-danger" role="alert">';
-            foreach ($error as $err) {
-                echo '<p>' . $err . '</p>';
-            }
-            echo '</div>';
-        }
-        ?>
-        <form class="row g-3" action="registro.php" method="post" autocomplete="off">
-            <div class="col-md-6">
-                <label for="nombres"><span class="text-danger">* </span> Nombres</label>
-                <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Ej. Juan Carlos" value="<?php echo $nombres; ?>" required>
-            </div>
-            <div class="col-md-6">
-                <label for="apellidos"><span class="text-danger">* </span> Apellidos</label>
-                <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Ej. Pérez González" value="<?php echo $apellidos; ?>" required>
-            </div>
-            <div class="col-md-6">
-                <label for="email"><span class="text-danger">* </span> Correo Electrónico</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="ejemplo@correo.com" value="<?php echo $email; ?>" required>
-            </div>
-            <div class="col-md-6">
-                <label for="usuario"><span class="text-danger">* </span> Usuario</label>
-                <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Tu nombre de usuario" value="<?php echo $usuario; ?>" required>
-            </div>
-            <fieldset class="col-md-12">
-                <legend><strong>Contraseña</strong></legend>
+        <div class="container">
+            <h2>Ingresar Sus Datos</h2>
+            <?php if ($mensaje_exito): ?>
+                <div class="alert alert-success">
+                    <?php echo $mensaje_exito; ?>
+                </div>
+            <?php endif; ?>
+            <?php mostrarMensaje($error); ?>
+            <form class="row g-3" action="registro.php" method="post" autocomplete="off">
                 <div class="col-md-6">
-                    <label for="password"><span class="text-danger">* </span> Contraseña</label>
-                    <input type="password" name="password" id="password" class="form-control" value="<?php echo $password; ?>" required>
+                    <label for="nombres"><span class="text-danger">* </span> Nombres</label>
+                    <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Ej. Juan Carlos" value="<?php echo $nombres; ?>" >
                 </div>
                 <div class="col-md-6">
-                    <label for="repassword"><span class="text-danger">* </span> Repetir Contraseña</label>
-                    <input type="password" name="repassword" id="repassword" class="form-control" value="<?php echo $repassword; ?>" required>
+                    <label for="apellidos"><span class="text-danger">* </span> Apellidos</label>
+                    <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Ej. Pérez González" value="<?php echo $apellidos; ?>" >
                 </div>
-            </fieldset>
-            <div class="col-12">
-                <button type="submit" class="btn btn-cesta">Registrar</button>
-            </div>
-        </form>
-    </div>
-</section>
+                <div class="col-md-6">
+                    <label for="email"><span class="text-danger">* </span> Correo Electrónico</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="ejemplo@correo.com" value="<?php echo $email; ?>" >
+                </div>
+                <div class="col-md-6">
+                    <label for="usuario"><span class="text-danger">* </span> Usuario</label>
+                    <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Tu nombre de usuario" value="<?php echo $usuario; ?>" >
+                </div>
+                <fieldset class="col-md-12">
+                    <legend><strong>Contraseña</strong></legend>
+                    <div class="col-md-6">
+                        <label for="password"><span class="text-danger">* </span> Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control" value="<?php echo $password; ?>" >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="repassword"><span class="text-danger">* </span> Repetir Contraseña</label>
+                        <input type="password" name="repassword" id="repassword" class="form-control" value="<?php echo $repassword; ?>" >
+                    </div>
+                </fieldset>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-cesta">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </section>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    
 </body>
 </html>

@@ -55,10 +55,21 @@ if ($producto != null) {
                                     <a href="#" class="nav-link">Contáctanos</a>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-rosa">
+                            <a href="#" class="btn btn-rosa me-3">
                                 Cesta <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                             </a>
-                            <a href="login.php" class="btn btn-rosa ms-2">Iniciar Sesión</a> 
+                            <?php  if (isset($_SESSION['user_id'])) { ?>
+                        <div class="dropdown">
+                            <button class="btn btn-rosa dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <?php echo $_SESSION['user_name']; ?>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a></li>   
+                            </ul>
+                        </div>
+                    <?php } else { ?>
+                        <a href="login.php" class="btn btn-rosa">Inicia sesión</a> 
+                    <?php } ?>
                         </div>
                     </div>
                 </div>
