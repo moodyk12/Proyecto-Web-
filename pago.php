@@ -59,17 +59,17 @@ if ($producto != null) {
                                 Cesta <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                             </a>
                             <?php  if (isset($_SESSION['user_id'])) { ?>
-                        <div class="dropdown">
-                            <button class="btn btn-rosa dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php echo $_SESSION['user_name']; ?>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a></li>   
-                            </ul>
-                        </div>
-                    <?php } else { ?>
-                        <a href="login.php" class="btn btn-rosa">Inicia sesión</a> 
-                    <?php } ?>
+                                <div class="dropdown">
+                                    <button class="btn btn-rosa dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php echo $_SESSION['user_name']; ?>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a></li>   
+                                    </ul>
+                                </div>
+                            <?php } else { ?>
+                                <a href="login.php" class="btn btn-rosa">Inicia sesión</a> 
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@ if ($producto != null) {
             </section>  
                 
                     <script src="js/jquery.min.js"></script>
-                    <script src="js/bootstrap.min.js"></script>
+                    <script src="js/bootstrap.bundle.min.js"></script>
                     <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>"></script>
                     <script>
                         paypal.Buttons({
