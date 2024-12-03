@@ -1,12 +1,14 @@
 # Proyecto-Web-
 
-Proyecto Tienda Bunny Vibes
+Tienda Bunny Vibes
 Diseño responsivo.
 Imagenes, descripción y descuentos.
 Cesta de compras.
 Pago con Paypal. 
 Envío de correo electrónico con información de la compra.
-Registro de clientes, validaciones, inicio y cierre de sesión.
+Registro de clientes
+validaciones en casi todas las pantallas :).
+inicio y cierre de sesión.
 detalles de su compra realizada 
 Recuperación de contraseña vía correo electrónico.
 
